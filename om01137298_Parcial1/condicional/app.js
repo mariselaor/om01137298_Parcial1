@@ -1,29 +1,25 @@
-const { createApp, defineComponent, ref } = Vue;
-
-const ConditionalMessage = defineComponent({
-  props: {
-    isHappy: {
-      type: Boolean,
-      required: true
-    }
+Vue.createApp({
+  data() {
+      return {
+          mensaje: false
+      };
   },
-  setup(props) {
-    return {
-      isHappy: props.isHappy
-    };
+  methods: {
+      cambiarMensaje() {
+          this.mensaje = !this.mensaje;
+      }
   },
-  template: `
-    <div>
-      <p v-if="isHappy">¡Estoy feliz!</p>
-      <p v-else>No estoy tan feliz...</p>
-    </div>
-  `
-});
-
-const app = createApp({
   components: {
-    ConditionalMessage
+      'mensaje': {
+          props: ['mensaje'],
+          template: `
+              <div>
+                  <p v-if="mensaje">¡Bienvenido de nuevo!</p>
+                  <p v-else>Por favor click para seguir probando.</p>
+              </div>
+          `
+      }
   }
-});
+}).mount('#app');
+//Realizado con option api
 
-app.mount('#app');
